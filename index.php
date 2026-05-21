@@ -1,25 +1,33 @@
 
-<?php require_once 'inc/header.php' ?>
+<?php require_once 'inc/header.php';
+require_once 'config/connection.php';
+?>
+<?php 
+$query = "SELECT * FROM posts";
+$result = mysqli_query($connection, $query);
+$fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+    <link rel="stylesheet" href="assets/css/index.css">
     <!-- Page Content -->
     <!-- Banner Starts Here -->
     <div class="banner header-text">
       <div class="owl-banner owl-carousel">
         <div class="banner-item-01">
           <div class="text-content">
-            <!-- <h4>Best Offer</h4> -->
-            <!-- <h2>New Arrivals On Sale</h2> -->
+            <h4>Best Offer</h4>
+            <h2>New Arrivals On Sale</h2>
           </div>
         </div>
         <div class="banner-item-02">
           <div class="text-content">
-            <!-- <h4>Flash Deals</h4> -->
-            <!-- <h2>Get your best products</h2> -->
+            <h4>Flash Deals</h4>
+            <h2>Get your best products</h2>
           </div>
         </div>
         <div class="banner-item-03">
           <div class="text-content">
-            <!-- <h4>Last Minute</h4> -->
-            <!-- <h2>Grab last minute deals</h2> -->
+            <h4>Last Minute</h4>
+            <h2>Grab last minute deals</h2>
           </div>
         </div>
       </div>
@@ -32,141 +40,48 @@
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Latest Posts</h2>
-              <!-- <a href="products.html">view all products <i class="fa fa-angle-right"></i></a> -->
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="#"><img src="assets/images/product_01.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>created_at</h6>
-                <p> Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <!-- <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (24)</span> -->
-                <div class="d-flex justify-content-end">
-                  <a href="viewPost.php" class="btn btn-info "> view</a>
+
+          <?php if($fetch_posts):
+          foreach($fetch_posts as $post): ?>
+          <div class="col-md-6 col-lg-4 mb-4">
+            <article class="post-card card border-0 h-100">
+              <a href="viewPost.php" class="card-img-wrap">
+                <img src="assets/images/postImage/<?= $post['image'] ?>" alt="Blog post cover">
+              </a>
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="post-date"><i class="fa fa-calendar"></i> <?= $post['created_at'] ?> </span>
+                  <span class="tag-chip">Design</span>
                 </div>
-                
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="#"><img src="assets/images/product_02.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>created at</h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <!-- <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (21)</span> -->
-                <div class="d-flex justify-content-end">
-                  <a href="http://" class="btn btn-info "> view</a>
+                <h3 class="card-title">
+                  <a href="viewPost.php"><?= $post['title'] ?></a>
+                </h3>
+                <p class="card-text flex-grow-1"><?= $post['body'] ?></p>
+                <div class="d-flex justify-content-end mt-3">
+                  <a href="viewPost.php" class="btn-future">View<i class="fa fa-long-arrow-right"></i></a>
                 </div>
               </div>
-            </div>
+            </article>
           </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="#"><img src="assets/images/product_03.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>created_at</h6>
-                <p>Sixteen Clothing is free CSS template provided by TemplateMo.</p>
-                <!-- <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (36)</span> -->
-                <div class="d-flex justify-content-end">
-                  <a href="http://" class="btn btn-info "> view</a>
+          <?php endforeach;
+          else: ?>
+            <div class="col-md-12">
+              <div class="no-posts">
+                <div class="no-posts-icon">
+                  <i class="fa fa-file-text-o"></i>
                 </div>
+                <h3>No posts yet</h3>
+                <p>There are no blog posts to show right now. Be the first to share something.</p>
+                <a href="addPost.php" class="filled-button">Add New Post</a>
               </div>
             </div>
-          </div>
-       
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="#"><img src="assets/images/product_01.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>created_at</h6>
-                <p> Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <!-- <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (24)</span> -->
-                <div class="d-flex justify-content-end">
-                  <a href="http://" class="btn btn-info "> view</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="product-item">
-              <a href="#"><img src="assets/images/product_02.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>created at</h6>
-                <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <!-- <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (21)</span> --> 
-                <div class="d-flex justify-content-end">
-                  <a href="http://" class="btn btn-info "> view</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">  
-            <div class="product-item">
-              <a href="#"><img src="assets/images/product_03.jpg" alt=""></a>
-              <div class="down-content">
-                <a href="#"><h4>Tittle goes here</h4></a>
-                <h6>created_at</h6>
-                <p>Sixteen Clothing is free CSS template provided by TemplateMo.</p>
-                <!-- <ul class="stars">
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                  <li><i class="fa fa-star"></i></li>
-                </ul>
-                <span>Reviews (36)</span> -->
-                <div class="d-flex justify-content-end">
-                  <a href="http://" class="btn btn-info "> view</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php endif; ?>
+
+
         </div>
       </div>
     </div>
-
- 
     
 <?php require_once 'inc/footer.php' ?>
