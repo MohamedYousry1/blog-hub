@@ -1,0 +1,124 @@
+/* Add post page — form alerts */
+
+.add-post-page .form-alerts {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.alert-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  animation: alertSlideIn 0.35s ease-out;
+  position: relative;
+}
+
+@keyframes alertSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-banner--success {
+  background: #f0faf4;
+  border-color: #c3e6cb;
+}
+
+.alert-banner--error {
+  background: #fff5f5;
+  border-color: rgba(243, 63, 63, 0.25);
+}
+
+.alert-banner__icon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.alert-banner--success .alert-banner__icon {
+  background: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+}
+
+.alert-banner--error .alert-banner__icon {
+  background: rgba(243, 63, 63, 0.12);
+  color: #f33f3f;
+}
+
+.alert-banner__content {
+  flex: 1;
+  min-width: 0;
+  padding-right: 28px;
+}
+
+.alert-banner__title {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e1e1e;
+  margin-bottom: 4px;
+}
+
+.alert-banner__message {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #4a4a4a;
+  margin: 0;
+}
+
+.alert-banner__list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+
+.alert-banner__list li + li {
+  margin-top: 4px;
+}
+
+.alert-banner__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.alert-banner__close:hover {
+  color: #1e1e1e;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.alert-banner--success .alert-banner__close:hover {
+  background: rgba(40, 167, 69, 0.1);
+}
+
+.alert-banner--error .alert-banner__close:hover {
+  background: rgba(243, 63, 63, 0.1);
+  color: #f33f3f;
+}
