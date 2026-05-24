@@ -53,7 +53,9 @@ $post = mysqli_fetch_assoc($result); // for single post
                   <i class="fa fa-long-arrow-left"></i> Back to posts
                 </a>
                 <a href="editPost.php?id=<?= $post['id'] ?>" class="btn btn-outline-primary">Edit post</a>
-                <a href="deletePost.php" class="btn btn-danger">Delete post</a>
+                <form style="display: inline;" method="POST" action="handle/deletePost.php?id=<?= $post['id'] ?>">
+                    <button class="btn btn-danger" name="delete"> Delete post </button>
+                </form>
               </div>
             </div>
           </div>
