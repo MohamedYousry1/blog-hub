@@ -3,10 +3,13 @@ require_once 'config/connection.php';
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
+}else{
+  header("location:index.php");
+  exit();
 }
 $query = "SELECT * FROM posts where id = '$id';";
 $result = mysqli_query($connection, $query);
-$fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$post = mysqli_fetch_assoc($result); // for single post
 
 ?>
 <link rel="stylesheet" href="assets/css/viewPost.css">
@@ -32,8 +35,6 @@ $fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
           <h2>Post Details</h2>
         </div>
       </div>
-      <?php if ($fetch_posts):
-        foreach ($fetch_posts as $post): ?>
           <div class="col-md-6">
             <div class="right-image">
               <img src="assets/images/postImage/<?= $post['image'] ?>" alt="Post cover">
@@ -51,14 +52,11 @@ $fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <a href="index.php" class="btn-back">
                   <i class="fa fa-long-arrow-left"></i> Back to posts
                 </a>
-                <a href="editPost.php" class="btn btn-outline-primary">Edit post</a>
+                <a href="editPost.php?id=<?= $post['id'] ?>" class="btn btn-outline-primary">Edit post</a>
                 <a href="deletePost.php" class="btn btn-danger">Delete post</a>
               </div>
             </div>
           </div>
-      <?php
-        endforeach;
-      endif; ?>
     </div>
   </div>
 </div>
