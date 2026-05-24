@@ -5,7 +5,7 @@
     </div>
     <div class="alert-banner__content">
       <span class="alert-banner__title">Success</span>
-      <p class="alert-banner__message"><?= htmlspecialchars("- " . $_SESSION['success'], ENT_QUOTES, 'UTF-8'); ?></p>
+      <p class="alert-banner__message"><?= htmlspecialchars($_SESSION['success'], ENT_QUOTES, 'UTF-8'); ?></p>
     </div>
     <button type="button" class="alert-banner__close" aria-label="Dismiss message" onclick="this.closest('.alert-banner').remove()">&times;</button>
   </div>
