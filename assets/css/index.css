@@ -1,5 +1,10 @@
 /* Index page — post cards */
 
+.latest-products .form-alerts {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
 .latest-products .post-card {
   background: #fff;
   border: 1px solid #eee;

@@ -1,4 +1,37 @@
-/* Add post page — form alerts */
+/* Add / edit post pages */
+
+.add-post-page {
+  margin-bottom: 80px;
+}
+
+.add-post-page form {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.add-post-page .form-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e1e1e;
+}
+
+.add-post-page .form-control {
+  border-color: #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.add-post-page .form-control:focus {
+  border-color: #2600ff;
+  box-shadow: 0 0 0 0.2rem rgba(53, 53, 255, 0.15);
+}
+
+.add-post-page .filled-button {
+  margin-top: 8px;
+}
 
 .add-post-page .form-alerts {
   width: 100%;
