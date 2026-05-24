@@ -28,7 +28,7 @@ $post = mysqli_fetch_assoc($result); // for single post
   </div>
 </div>
 
-<div class="container w-50 add-post-page">
+<div class="container w-50 edit-post-page">
   <div class="d-flex justify-content-center">
     <h3 class="my-5">Edit Post</h3>
   </div>
