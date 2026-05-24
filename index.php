@@ -1,4 +1,5 @@
-<?php require_once 'inc/header.php';
+<?php session_start();
+require_once 'inc/header.php';
 require_once 'config/connection.php';
 ?>
 <?php
@@ -7,6 +8,7 @@ $result = mysqli_query($connection, $query);
 $fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/addPost.css">
 <!-- Page Content -->
 <!-- Banner Starts Here -->
 <div class="banner header-text">
@@ -39,6 +41,18 @@ $fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
       <div class="col-md-12">
         <div class="section-heading">
           <h2>Latest Posts</h2>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="form-alerts">
+          <?php
+          if (isset($_SESSION['success'])):
+            require_once 'inc/success.php';
+          elseif (isset($_SESSION['errors'])):
+            require_once 'inc/error.php';
+          endif;
+          ?>
         </div>
       </div>
 
