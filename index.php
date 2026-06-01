@@ -3,9 +3,32 @@ require_once 'inc/header.php';
 require_once 'config/connection.php';
 ?>
 <?php
-$query = "SELECT * FROM posts";
+
+if (isset($_GET['page'])) {
+  $page = $_GET['page'];
+} else {
+  $page = 1;
+}
+
+$numPosts = "SELECT COUNT(id) as total FROM posts";
+$resOfNumPosts = mysqli_query($connection, $numPosts);
+$totalPosts = mysqli_fetch_assoc($resOfNumPosts)['total'];
+$limit = 3;
+$offset = ($page - 1) * $limit;
+
+$numPages = ceil($totalPosts / $limit);
+if ($page < 1) {
+  header("location:index.php?page=1");
+  exit();
+} elseif ($numPages < $page) {
+  header("location:index.php?page=$numPages");
+  exit();
+}
+
+$query = "SELECT * FROM posts LIMIT $limit OFFSET $offset";
 $result = mysqli_query($connection, $query);
 $fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 <link rel="stylesheet" href="assets/css/index.css">
 <link rel="stylesheet" href="assets/css/addPost.css">
@@ -78,8 +101,29 @@ $fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
               </div>
             </article>
           </div>
-        <?php endforeach;
-      else: ?>
+        <?php endforeach; ?>
+
+        <div class="col-md-12 d-flex justify-content-center mt-4">
+          <nav aria-label="Page navigation">
+            <ul class="pagination mb-0">
+              <li class="page-item <?php if($page == 1) echo 'disabled'; ?> ">
+                <a class="page-link" href="index.php?page=<?= $page - 1; ?>" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <?php for ($i = 1; $i <= $numPages; $i++): ?>
+                <li class="page-item"><a class="page-link" href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+              <?php endfor; ?>
+              <li class="page-item <?php if($page == $numPages) echo 'disabled'; ?> ">
+                <a class="page-link" href="index.php?page=<?= $page + 1; ?>" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+      <?php else: ?>
         <div class="col-md-12">
           <div class="no-posts">
             <div class="no-posts-icon">
@@ -91,6 +135,7 @@ $fetch_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
           </div>
         </div>
       <?php endif; ?>
+
 
 
     </div>
